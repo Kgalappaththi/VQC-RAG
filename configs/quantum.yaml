@@ -1,0 +1,9 @@
+encoding: angle
+qubits: 8
+circuit_depth: 2
+ansatz: ry_rz_cnot
+observable: average_pauli_z
+optimizer: adam
+learning_rate: 0.001
+epochs: 100
+random_seeds: [42, 123, 2026, 7, 99]
