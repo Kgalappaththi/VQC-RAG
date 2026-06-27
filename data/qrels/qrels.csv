@@ -1,0 +1,4 @@
+query_id,document_id,relevance
+Q001,D003,1
+Q002,D001,1
+Q003,D002,1
