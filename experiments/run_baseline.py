@@ -37,3 +37,13 @@ results_df.to_csv("results/baseline_results.csv", index=False)
 print(results_df)
 print("Mean Recall@3:", results_df["recall_at_3"].mean())
 print("MRR:", results_df["rr"].mean())
+
+save_experiment_log({
+    "experiment_id": "E001",
+    "method": "hybrid_baseline",
+    "dataset": "sample",
+    "top_k": 3,
+    "embedding_model": "all-MiniLM-L6-v2",
+    "mean_recall_at_3": float(mean_recall),
+    "mean_mrr": float(mean_mrr)
+})
