@@ -1,4 +1,5 @@
 import pandas as pd
+from src.utils.logging_utils import save_experiment_log
 from src.retrieval.hybrid import hybrid_search
 from src.evaluation.retrieval_metrics import recall_at_k, reciprocal_rank
 
@@ -34,9 +35,12 @@ for _, query_row in queries.iterrows():
 results_df = pd.DataFrame(results)
 results_df.to_csv("results/baseline_results.csv", index=False)
 
+mean_recall = results_df["recall_at_3"].mean()
+mean_mrr = results_df["rr"].mean()
+
 print(results_df)
-print("Mean Recall@3:", results_df["recall_at_3"].mean())
-print("MRR:", results_df["rr"].mean())
+print("Mean Recall@3:", mean_recall)
+print("MRR:", mean_mrr)
 
 save_experiment_log({
     "experiment_id": "E001",
