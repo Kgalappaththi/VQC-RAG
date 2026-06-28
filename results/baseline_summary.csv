@@ -1,0 +1,4 @@
+Method,Recall@3,MRR
+BM25,1.0,1.0
+Dense,1.0,1.0
+Hybrid,1.0,1.0

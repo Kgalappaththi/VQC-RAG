@@ -33,7 +33,7 @@ for _, query_row in queries.iterrows():
     })
 
 results_df = pd.DataFrame(results)
-results_df.to_csv("results/baseline_results.csv", index=False)
+results_df.to_csv("results/hybrid_results.csv", index=False)
 
 mean_recall = results_df["recall_at_3"].mean()
 mean_mrr = results_df["rr"].mean()
