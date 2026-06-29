@@ -21,3 +21,6 @@ Thumbs.db
 *.egg-info/
 build/
 dist/
+
+# Downloaded benchmark datasets
+data/beir/
