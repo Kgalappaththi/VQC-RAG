@@ -1,3 +1,5 @@
+from datetime import datetime
+import time
 import pandas as pd
 from src.utils.logging_utils import save_experiment_log
 from src.retrieval.hybrid import hybrid_search
@@ -20,7 +22,9 @@ for _, query_row in queries.iterrows():
     query_id = query_row["query_id"]
     query_text = query_row["query"]
 
+    start_time = time.perf_counter()
     retrieved = hybrid_search(query_text, docs_csv, embeddings_npy, top_k=10)
+    latency_ms = (time.perf_counter() - start_time) * 1000
     retrieved_ids = retrieved["document_id"].astype(str).tolist()
 
     relevant_ids = qrels[qrels["query_id"] == query_id]["document_id"].astype(str).tolist()
@@ -34,6 +38,7 @@ for _, query_row in queries.iterrows():
         "ndcg_at_5": ndcg_at_k(retrieved_ids, relevant_ids, 5),
         "ndcg_at_10": ndcg_at_k(retrieved_ids, relevant_ids, 10),
         "map": average_precision(retrieved_ids, relevant_ids),
+        "latency_ms": latency_ms,
     })
 
 results_df = pd.DataFrame(results)
@@ -46,6 +51,7 @@ mean_mrr = results_df["mrr"].mean()
 mean_ndcg_5 = results_df["ndcg_at_5"].mean()
 mean_ndcg_10 = results_df["ndcg_at_10"].mean()
 mean_map = results_df["map"].mean()
+mean_latency = results_df["latency_ms"].mean()
 
 print(results_df)
 print("Mean Recall@3:", mean_recall_3)
@@ -55,18 +61,33 @@ print("MRR:", mean_mrr)
 print("nDCG@5:", mean_ndcg_5)
 print("nDCG@10:", mean_ndcg_10)
 print("MAP:", mean_map)
+print("Mean Latency (ms):", mean_latency)
 
 save_experiment_log({
     "experiment_id": "E003",
+
+    "timestamp": datetime.now().isoformat(),
+
     "method": "hybrid_baseline",
+
     "dataset": "BEIR SciFact",
-    "top_k": 10,
+
     "embedding_model": "all-MiniLM-L6-v2",
-    "mean_recall_at_3": float(mean_recall_3),
-    "mean_recall_at_5": float(mean_recall_5),
-    "mean_recall_at_10": float(mean_recall_10),
-    "mean_mrr": float(mean_mrr),
-    "mean_ndcg_at_5": float(mean_ndcg_5),
-    "mean_ndcg_at_10": float(mean_ndcg_10),
-    "mean_map": float(mean_map),
+
+    "fusion_method": "Weighted Sum",
+
+    "top_k": 10,
+
+    "random_seed": 42,
+
+    "metrics": {
+        "Recall@3": float(mean_recall_3),
+        "Recall@5": float(mean_recall_5),
+        "Recall@10": float(mean_recall_10),
+        "MRR": float(mean_mrr),
+        "nDCG@5": float(mean_ndcg_5),
+        "nDCG@10": float(mean_ndcg_10),
+        "MAP": float(mean_map),
+        "Latency_ms": float(mean_latency)
+    }
 })

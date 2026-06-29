@@ -1,3 +1,4 @@
+import time
 import pandas as pd
 from src.retrieval.bm25 import bm25_search
 from src.evaluation.retrieval_metrics import (
@@ -17,11 +18,13 @@ for _, query_row in queries.iterrows():
     query_id = query_row["query_id"]
     query_text = query_row["query"]
 
+    start_time = time.perf_counter()
     retrieved = bm25_search(query_text, documents_df, top_k=10)
+    latency_ms = (time.perf_counter() - start_time) * 1000
     retrieved_ids = retrieved["document_id"].astype(str).tolist()
 
     relevant_ids = qrels[qrels["query_id"] == query_id]["document_id"].astype(str).tolist()
-
+    
     results.append({
         "query_id": query_id,
         "recall_at_3": recall_at_k(retrieved_ids, relevant_ids, 3),
@@ -31,6 +34,7 @@ for _, query_row in queries.iterrows():
         "ndcg_at_5": ndcg_at_k(retrieved_ids, relevant_ids, 5),
         "ndcg_at_10": ndcg_at_k(retrieved_ids, relevant_ids, 10),
         "map": average_precision(retrieved_ids, relevant_ids),
+        "latency_ms": latency_ms,
     })
 
 results_df = pd.DataFrame(results)
@@ -44,3 +48,4 @@ print("MRR:", results_df["mrr"].mean())
 print("nDCG@5:", results_df["ndcg_at_5"].mean())
 print("nDCG@10:", results_df["ndcg_at_10"].mean())
 print("MAP:", results_df["map"].mean())
+print("Mean Latency (ms):", results_df["latency_ms"].mean())

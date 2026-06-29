@@ -20,6 +20,7 @@ for method, file_path in files.items():
         "nDCG@5": round(df["ndcg_at_5"].mean(), 4),
         "nDCG@10": round(df["ndcg_at_10"].mean(), 4),
         "MAP": round(df["map"].mean(), 4),
+        "Latency_ms": round(df["latency_ms"].mean(), 4),
     })
 
 summary_df = pd.DataFrame(summary)
