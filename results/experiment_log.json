@@ -4,7 +4,7 @@
     "dataset": "sample",
     "top_k": 3,
     "embedding_model": "all-MiniLM-L6-v2",
-    "mean_recall_at_3": 1.0,
-    "mean_mrr": 1.0,
-    "timestamp": "2026-06-28T23:18:38.258502"
+    "mean_recall_at_3": 0.6524444444444445,
+    "mean_mrr": 0.5977777777777777,
+    "timestamp": "2026-06-29T02:02:47.543681"
 }
