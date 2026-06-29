@@ -1,7 +1,12 @@
 import pandas as pd
 from src.utils.logging_utils import save_experiment_log
 from src.retrieval.hybrid import hybrid_search
-from src.evaluation.retrieval_metrics import recall_at_k, reciprocal_rank
+from src.evaluation.retrieval_metrics import (
+    recall_at_k,
+    reciprocal_rank,
+    ndcg_at_k,
+    average_precision,
+)
 
 docs_csv = "data/processed/documents_clean.csv"
 embeddings_npy = "results/document_embeddings.npy"
@@ -15,39 +20,53 @@ for _, query_row in queries.iterrows():
     query_id = query_row["query_id"]
     query_text = query_row["query"]
 
-    retrieved = hybrid_search(
-        query_text,
-        docs_csv,
-        embeddings_npy,
-        top_k=3
-    )
+    retrieved = hybrid_search(query_text, docs_csv, embeddings_npy, top_k=10)
+    retrieved_ids = retrieved["document_id"].astype(str).tolist()
 
-    retrieved_ids = retrieved["document_id"].tolist()
-
-    relevant_ids = qrels[qrels["query_id"] == query_id]["document_id"].tolist()
+    relevant_ids = qrels[qrels["query_id"] == query_id]["document_id"].astype(str).tolist()
 
     results.append({
         "query_id": query_id,
         "recall_at_3": recall_at_k(retrieved_ids, relevant_ids, 3),
-        "rr": reciprocal_rank(retrieved_ids, relevant_ids)
+        "recall_at_5": recall_at_k(retrieved_ids, relevant_ids, 5),
+        "recall_at_10": recall_at_k(retrieved_ids, relevant_ids, 10),
+        "mrr": reciprocal_rank(retrieved_ids, relevant_ids),
+        "ndcg_at_5": ndcg_at_k(retrieved_ids, relevant_ids, 5),
+        "ndcg_at_10": ndcg_at_k(retrieved_ids, relevant_ids, 10),
+        "map": average_precision(retrieved_ids, relevant_ids),
     })
 
 results_df = pd.DataFrame(results)
 results_df.to_csv("results/hybrid_results.csv", index=False)
 
-mean_recall = results_df["recall_at_3"].mean()
-mean_mrr = results_df["rr"].mean()
+mean_recall_3 = results_df["recall_at_3"].mean()
+mean_recall_5 = results_df["recall_at_5"].mean()
+mean_recall_10 = results_df["recall_at_10"].mean()
+mean_mrr = results_df["mrr"].mean()
+mean_ndcg_5 = results_df["ndcg_at_5"].mean()
+mean_ndcg_10 = results_df["ndcg_at_10"].mean()
+mean_map = results_df["map"].mean()
 
 print(results_df)
-print("Mean Recall@3:", mean_recall)
+print("Mean Recall@3:", mean_recall_3)
+print("Mean Recall@5:", mean_recall_5)
+print("Mean Recall@10:", mean_recall_10)
 print("MRR:", mean_mrr)
+print("nDCG@5:", mean_ndcg_5)
+print("nDCG@10:", mean_ndcg_10)
+print("MAP:", mean_map)
 
 save_experiment_log({
-    "experiment_id": "E001",
+    "experiment_id": "E003",
     "method": "hybrid_baseline",
-    "dataset": "sample",
-    "top_k": 3,
+    "dataset": "BEIR SciFact",
+    "top_k": 10,
     "embedding_model": "all-MiniLM-L6-v2",
-    "mean_recall_at_3": float(mean_recall),
-    "mean_mrr": float(mean_mrr)
+    "mean_recall_at_3": float(mean_recall_3),
+    "mean_recall_at_5": float(mean_recall_5),
+    "mean_recall_at_10": float(mean_recall_10),
+    "mean_mrr": float(mean_mrr),
+    "mean_ndcg_at_5": float(mean_ndcg_5),
+    "mean_ndcg_at_10": float(mean_ndcg_10),
+    "mean_map": float(mean_map),
 })
