@@ -1,20 +1,20 @@
 {
-    "experiment_id": "E003",
-    "timestamp": "2026-06-29T23:17:10.904744",
-    "method": "hybrid_baseline",
+    "experiment_id": "E006",
+    "timestamp": "2026-06-30T23:34:39.717367",
+    "method": "hybrid_plus_vqc_reranking",
     "dataset": "BEIR SciFact",
-    "embedding_model": "all-MiniLM-L6-v2",
-    "fusion_method": "Weighted Sum",
-    "top_k": 10,
-    "random_seed": 42,
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "vqc_model": "results/vqc/trained_vqc_6q_depth4_e100_lr001.pkl",
+    "top_k": 20,
+    "fusion_alpha": 0.8,
     "metrics": {
-        "Recall@3": 0.6524444444444445,
-        "Recall@5": 0.6993888888888888,
-        "Recall@10": 0.7618333333333333,
-        "MRR": 0.6145608465608465,
-        "nDCG@5": 0.6239810147915169,
-        "nDCG@10": 0.6455552730028976,
-        "MAP": 0.6035595238095238,
-        "Latency_ms": 8900.636196333144
+        "Recall@3": 0.6567777777777778,
+        "Recall@5": 0.7046666666666666,
+        "Recall@10": 0.7593333333333333,
+        "MRR": 0.6150666399876926,
+        "nDCG@5": 0.6214938663886306,
+        "nDCG@10": 0.6403287973360303,
+        "MAP": 0.6014598610453874,
+        "Latency_ms": 7596.9479836667115
     }
 }
