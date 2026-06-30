@@ -1,0 +1,40 @@
+VQC_EXPERIMENTS = {
+    "E003_4q_d4": {
+        "experiment_id": "E003_4q_d4",
+        "n_qubits": 4,
+        "depth": 4,
+        "epochs": 100,
+        "learning_rate": 0.01,
+        "margin": 0.1,
+        "seed": 42,
+        "dataset_path": "results/vqc/vqc_training_dataset_4q.npz",
+        "preprocessor_path": "results/vqc/vqc_preprocessor_4q.pkl",
+        "model_output": "results/vqc/trained_vqc_4q_depth4_e100_lr001.pkl",
+    },
+
+    "E004_6q_d4": {
+        "experiment_id": "E004_6q_d4",
+        "n_qubits": 6,
+        "depth": 4,
+        "epochs": 100,
+        "learning_rate": 0.01,
+        "margin": 0.1,
+        "seed": 42,
+        "dataset_path": "results/vqc/vqc_training_dataset_6q.npz",
+        "preprocessor_path": "results/vqc/vqc_preprocessor_6q.pkl",
+        "model_output": "results/vqc/trained_vqc_6q_depth4_e100_lr001.pkl",
+    },
+
+    "E005_8q_d4": {
+        "experiment_id": "E005_8q_d4",
+        "n_qubits": 8,
+        "depth": 4,
+        "epochs": 100,
+        "learning_rate": 0.01,
+        "margin": 0.1,
+        "seed": 42,
+        "dataset_path": "results/vqc/vqc_training_dataset_8q.npz",
+        "preprocessor_path": "results/vqc/vqc_preprocessor_8q.pkl",
+        "model_output": "results/vqc/trained_vqc_8q_depth4_e100_lr001.pkl",
+    },
+}
