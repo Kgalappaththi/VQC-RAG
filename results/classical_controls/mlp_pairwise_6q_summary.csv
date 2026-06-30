@@ -1,0 +1,2 @@
+classification_accuracy,roc_auc,pairwise_accuracy,model,dataset,n_components
+0.631578947368421,0.6933075447884738,0.7611336032388664,MLP,results/vqc/vqc_training_dataset_6q.npz,6
