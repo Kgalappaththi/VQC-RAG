@@ -1,0 +1,2 @@
+mean_positive_score,mean_negative_score,std_positive_score,std_negative_score,pairwise_accuracy,num_pairs,experiment_id,n_qubits,depth,epochs,learning_rate
+0.5097855620901497,0.4924092790795647,0.04320184656851804,0.04064382644577321,0.5870445344129555,247,E005_8q_d4,8,4,100,0.01
