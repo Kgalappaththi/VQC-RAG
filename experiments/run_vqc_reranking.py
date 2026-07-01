@@ -51,6 +51,9 @@ the existing Hybrid baseline.
 """
 
 from datetime import datetime
+from src.fusion.weighted_fusion import weighted_score_fusion
+from src.fusion.rank_fusion import rank_fusion
+from src.fusion.rrf_fusion import reciprocal_rank_fusion
 import time
 import pickle
 
@@ -70,9 +73,10 @@ from src.quantum.features import create_pair_feature, transform_features
 from src.quantum.trainer import build_trainable_vqc, quantum_relevance_score
 
 
-# ------------------------------------------------------------------
+# ---------------------------------------------------------
 # Experiment configuration
-# ------------------------------------------------------------------
+# ---------------------------------------------------------
+
 DOCS_CSV = "data/processed/documents_clean.csv"
 DOC_EMBEDDINGS_NPY = "results/document_embeddings.npy"
 QUERIES_CSV = "data/queries/queries.csv"
@@ -80,18 +84,24 @@ QRELS_CSV = "data/qrels/qrels.csv"
 
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 
-# Best-performing validated VQC from quantum ablation study
+# Best-performing VQC model
 VQC_MODEL_PATH = "results/vqc/trained_vqc_6q_depth4_e100_lr001.pkl"
 
-OUTPUT_RESULTS = "results/vqc_reranking_results.csv"
+# ---------------------------------------------------------
+# Fusion method
+# Options:
+#   "weighted"
+#   "rank"
+#   "rrf"
+# ---------------------------------------------------------
+FUSION_METHOD = "rrf"
 
-# Hybrid retriever first returns Top-20 candidates.
+# Weight used by weighted and rank fusion
+ALPHA = 0.8
+
 TOP_K_RETRIEVAL = 20
 
-# Fusion weight:
-# alpha = 1.0 means Hybrid only.
-# alpha = 0.8 means 80% Hybrid score + 20% VQC score.
-ALPHA = 0.8
+OUTPUT_RESULTS = f"results/vqc_reranking_{FUSION_METHOD}_results.csv"
 
 
 def normalize_scores(values):
@@ -306,10 +316,28 @@ def rerank_with_vqc(
     reranked["hybrid_score_norm"] = normalize_scores(reranked["hybrid_score"])
     reranked["vqc_score_norm"] = normalize_scores(reranked["vqc_score"])
 
-    reranked["final_score"] = (
-        alpha * reranked["hybrid_score_norm"]
-        + (1.0 - alpha) * reranked["vqc_score_norm"]
-    )
+    if FUSION_METHOD == "weighted":
+        reranked["final_score"] = weighted_score_fusion(
+            reranked["hybrid_score"],
+            reranked["vqc_score"],
+            alpha=ALPHA
+        )
+
+    elif FUSION_METHOD == "rank":
+        reranked["final_score"] = rank_fusion(
+            reranked["hybrid_score"],
+            reranked["vqc_score"],
+            alpha=ALPHA
+        )
+
+    elif FUSION_METHOD == "rrf":
+        reranked["final_score"] = reciprocal_rank_fusion(
+            reranked["hybrid_score"],
+            reranked["vqc_score"]
+        )
+
+    else:
+        raise ValueError(f"Unknown fusion method: {FUSION_METHOD}")
 
     return reranked.sort_values("final_score", ascending=False).reset_index(drop=True)
 
@@ -464,13 +492,14 @@ def main():
     save_experiment_log({
         "experiment_id": "E006",
         "timestamp": datetime.now().isoformat(),
-        "method": "hybrid_plus_vqc_reranking",
+        "method": f"hybrid_plus_vqc_{FUSION_METHOD}_fusion",
         "dataset": "BEIR SciFact",
         "embedding_model": MODEL_NAME,
         "vqc_model": VQC_MODEL_PATH,
         "top_k": TOP_K_RETRIEVAL,
         "fusion_alpha": ALPHA,
         "metrics": summary,
+        "fusion_method": FUSION_METHOD,
     })
 
 

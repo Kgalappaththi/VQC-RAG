@@ -1,20 +1,21 @@
 {
     "experiment_id": "E006",
-    "timestamp": "2026-06-30T23:34:39.717367",
-    "method": "hybrid_plus_vqc_reranking",
+    "timestamp": "2026-07-01T07:09:42.408979",
+    "method": "hybrid_plus_vqc_rrf_fusion",
     "dataset": "BEIR SciFact",
     "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
     "vqc_model": "results/vqc/trained_vqc_6q_depth4_e100_lr001.pkl",
     "top_k": 20,
     "fusion_alpha": 0.8,
     "metrics": {
-        "Recall@3": 0.6567777777777778,
-        "Recall@5": 0.7046666666666666,
-        "Recall@10": 0.7593333333333333,
-        "MRR": 0.6150666399876926,
-        "nDCG@5": 0.6214938663886306,
-        "nDCG@10": 0.6403287973360303,
-        "MAP": 0.6014598610453874,
-        "Latency_ms": 7596.9479836667115
-    }
+        "Recall@3": 0.4165,
+        "Recall@5": 0.5682777777777779,
+        "Recall@10": 0.7508888888888888,
+        "MRR": 0.38662235585765,
+        "nDCG@5": 0.4038550847638434,
+        "nDCG@10": 0.46479398104339453,
+        "MAP": 0.37718848553407375,
+        "Latency_ms": 7650.886606000227
+    },
+    "fusion_method": "rrf"
 }
