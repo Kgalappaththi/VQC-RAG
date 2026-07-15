@@ -1,3 +1,4 @@
+
 # Python cache
 __pycache__/
 *.py[cod]
@@ -24,3 +25,8 @@ dist/
 
 # Downloaded benchmark datasets
 data/beir/
+
+
+# Temporary test model
+results/models/test_vqc_model.pkl
+
