@@ -1,51 +1,47 @@
-# VQC-RAG: Variational Quantum Circuit-Assisted Re-ranking for Hybrid Retrieval-Augmented Generation
-
-# VQC-RAG
+# Simulated Variational Quantum Circuits for Hybrid Scientific Document Re-ranking
 
 ![Python](https://img.shields.io/badge/Python-3.13-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Tests](https://github.com/Kgalappaththi/VQC-RAG/actions/workflows/python-tests.yml/badge.svg)
 
 ## Overview
 
-This repository contains the complete implementation of a hybrid quantum-classical document re-ranking framework developed for Retrieval-Augmented Generation (RAG).
+This repository contains the implementation used for the research paper:
 
-The proposed framework investigates whether Variational Quantum Circuits (VQCs) can provide complementary relevance information during document re-ranking after Hybrid Retrieval. Hybrid Retrieval combines BM25 lexical retrieval and dense semantic retrieval, while the VQC learns nonlinear query-document relevance from engineered interaction features.
+**Simulated Variational Quantum Circuits for Hybrid Scientific Document Re-ranking**
 
-The implementation accompanies the research paper:
+The study investigates whether a simulated Variational Quantum Circuit (VQC) can improve second-stage document re-ranking in a hybrid scientific document retrieval system.
 
-**"A Systematic Evaluation of Variational Quantum Circuit-Assisted Re-ranking for Hybrid Retrieval-Augmented Generation"**
+The proposed framework combines BM25 lexical retrieval, dense semantic retrieval, engineered query-document interaction features, Principal Component Analysis (PCA), and a simulated VQC to estimate document relevance. Different quantum-classical fusion strategies are evaluated and compared with a classical neural network baseline.
+
+The experiments were conducted using the SciFact dataset from the BEIR benchmark.
 
 ---
 
-# Main Contributions
+## Main Features
 
-- Hybrid Retrieval baseline using BM25 and Dense Retrieval
-- Variational Quantum Circuit (VQC) document reranking
-- Pairwise ranking optimization
-- Quantum capacity analysis (4-, 6-, and 8-qubit circuits)
-- Classical MLP control model
-- Multiple fusion strategies
-  - Weighted Fusion
-  - Rank Fusion
-  - Reciprocal Rank Fusion
+- Hybrid retrieval using BM25 and dense retrieval
+- Simulated Variational Quantum Circuit (VQC) for document re-ranking
+- PCA-based feature reduction
+- Evaluation of multiple VQC configurations
+- Comparison of three fusion strategies
+- Classical multilayer perceptron (MLP) baseline
+- Standard information retrieval evaluation metrics
 - Statistical significance analysis
-- Fully reproducible experimental pipeline
 
 ---
 
-# Repository Structure
+## Repository Structure
 
 ```
 VQC-RAG/
 │
-├── configs/
-├── data/
-├── experiments/
-├── figures/
-├── results/
-├── src/
-├── tests/
+├── configs/          Configuration files
+├── data/             Dataset preparation
+├── experiments/      Experiment scripts
+├── figures/          Figures used in the manuscript
+├── results/          Experimental results
+├── src/              Source code
+├── tests/            Unit tests
 │
 ├── README.md
 ├── requirements.txt
@@ -55,33 +51,35 @@ VQC-RAG/
 
 ---
 
-# Dataset
+## Dataset
 
-Experiments use the **SciFact** dataset from the **BEIR benchmark**.
+The experiments use the **SciFact** dataset from the **BEIR benchmark**.
+
+The dataset is publicly available from the BEIR project and is not redistributed in this repository.
 
 Reference:
 
-Thakur et al., BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models.
+N. Thakur et al., *BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models.*
 
 ---
 
-# Installation
+## Installation
 
-## Clone repository
+Clone the repository
 
 ```bash
-git clone https://github.com/<YOUR_USERNAME>/VQC-RAG.git
+git clone https://github.com/Kgalappaththi/VQC-RAG.git
 cd VQC-RAG
 ```
 
-## Create environment
+Create the Python environment
 
 ```bash
 conda create -n vqc-rag python=3.13
 conda activate vqc-rag
 ```
 
-## Install dependencies
+Install the required packages
 
 ```bash
 pip install -r requirements.txt
@@ -89,110 +87,43 @@ pip install -r requirements.txt
 
 ---
 
-# Reproducing the Experiments
+## Running the Experiments
 
-## 1. Generate embeddings
+The main experiments can be reproduced using the scripts in the `experiments` folder.
 
-```bash
-python -m experiments.create_query_embeddings
-```
+Typical workflow:
 
-## 2. Run BM25
-
-```bash
-python -m experiments.run_bm25
-```
-
-## 3. Run Dense Retrieval
-
-```bash
-python -m experiments.run_dense
-```
-
-## 4. Run Hybrid Retrieval
-
-```bash
-python -m experiments.run_baseline_hybrid
-```
-
-## 5. Export Hybrid candidates
-
-```bash
-python -m experiments.export_hybrid_candidates
-```
-
-## 6. Build VQC dataset
-
-```bash
-python -m experiments.build_vqc_dataset
-```
-
-## 7. Train the VQC
-
-```bash
-python -m experiments.run_vqc_training
-```
-
-## 8. Evaluate the trained model
-
-```bash
-python -m experiments.evaluate_vqc_model
-```
-
-## 9. Run VQC reranking
-
-```bash
-python -m experiments.run_vqc_reranking
-```
-
-## 10. Run the classical MLP control
-
-```bash
-python -m experiments.run_mlp_pairwise
-```
-
-## 11. Statistical analysis
-
-```bash
-python -m experiments.run_statistical_tests
-```
-
-## 12. Generate publication figures
-
-```bash
-python -m experiments.generate_publication_figures
-```
+1. Prepare the SciFact dataset
+2. Run BM25 retrieval
+3. Run dense retrieval
+4. Generate hybrid retrieval results
+5. Build query-document interaction features
+6. Train the VQC models
+7. Evaluate VQC performance
+8. Apply fusion strategies
+9. Perform statistical analysis
+10. Generate the publication figures
 
 ---
 
-# Experimental Results
+## Experimental Summary
 
-Best Hybrid Retrieval
+The study evaluates simulated VQC-assisted document re-ranking under several circuit configurations and compares the results with classical retrieval methods.
 
-| Metric | Value |
-|---------|------:|
-| MRR | 0.6146 |
-| nDCG@10 | 0.6456 |
-| MAP | 0.6036 |
+The experiments show that the simulated VQC produces only small changes in retrieval performance compared with the hybrid retrieval baseline. Under the evaluated settings, these improvements were not statistically significant.
 
-Best Quantum Configuration
-
-- 6 qubits
-- Depth = 4
-- Pairwise Accuracy = 0.6437
-
-The weighted Hybrid + VQC fusion achieved the strongest overall performance among the evaluated quantum-assisted methods.
-
-Statistical hypothesis testing indicated that the observed improvements were **not statistically significant (α = 0.05)**.
+The repository provides a reproducible implementation for future research on quantum-assisted information retrieval.
 
 ---
 
-# Software
+## Software
+
+The implementation is based on
 
 - Python
 - PennyLane
 - PyTorch
-- SentenceTransformers
+- Sentence Transformers
 - Scikit-learn
 - NumPy
 - Pandas
@@ -200,28 +131,28 @@ Statistical hypothesis testing indicated that the observed improvements were **n
 
 ---
 
-# Citation
+## Citation
 
-If you use this repository, please cite the accompanying publication.
+If you use this repository, please cite the associated publication.
 
-```bibtex
-(To be added after publication)
-```
+The citation will be updated after publication.
 
 ---
 
-# License
+## License
 
-MIT License
+This project is released under the MIT License.
 
 ---
 
-# Contact
+## Contact
 
-Dr. Kalpana Galappaththi
+**Dr. Kalpana Galappaththi**
 
-Institute of Technology
-
-University of Moratuwa
-
+Division of Information Technology  
+Institute of Technology  
+University of Moratuwa  
+Diyagama, Homagama  
 Sri Lanka
+
+Email: kgalappaththi@itum.mrt.ac.lk
