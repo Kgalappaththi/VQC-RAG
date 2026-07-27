@@ -8,6 +8,9 @@ __pycache__/
 venv/
 env/
 
+# Pytest
+.pytest_cache/
+
 # Jupyter
 .ipynb_checkpoints/
 
@@ -17,6 +20,7 @@ Thumbs.db
 
 # IDE
 .vscode/
+.idea/
 
 # Python build
 *.egg-info/
