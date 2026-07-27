@@ -11,7 +11,7 @@ sentence-transformers==5.6.0
 transformers==5.12.1
 torch==2.12.1
 
-# Quantum machine learning
+# Quantum computing and machine learning
 pennylane==0.45.0
 pennylane-lightning==0.45.0
 

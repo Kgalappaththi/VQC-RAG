@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite this repository and the associated journal article."
 
-title: "VQC-RAG: Variational Quantum Circuit-Assisted Re-ranking for Hybrid Retrieval-Augmented Generation"
+title: "Simulated Variational Quantum Circuits for Hybrid Scientific Document Re-ranking"
 
 type: software
 
@@ -10,7 +10,7 @@ authors:
     given-names: "Kalpana"
 
   - family-names: "Wattegama"
-    given-names: "Chathura"
+    given-names: "Wattegama Gedara Chathura Piyumal Bandara"
 
 repository-code: "https://github.com/Kgalappaththi/VQC-RAG"
 
@@ -21,16 +21,17 @@ version: "1.0.0"
 date-released: 2026-07-15
 
 keywords:
-  - Retrieval-Augmented Generation
-  - Quantum Machine Learning
-  - Variational Quantum Circuits
-  - Hybrid Retrieval
+  - Scientific Document Retrieval
   - Information Retrieval
+  - Variational Quantum Circuits
+  - Quantum Machine Learning
+  - Hybrid Retrieval
   - BEIR
   - SciFact
 
 abstract: >
-  Hybrid Retrieval-Augmented Generation framework incorporating
-  Variational Quantum Circuit-based document re-ranking for
-  evaluating quantum-assisted information retrieval using the
-  BEIR SciFact benchmark.
+  This repository contains the implementation accompanying the manuscript
+  "Simulated Variational Quantum Circuits for Hybrid Scientific Document
+  Re-ranking". The study evaluates simulated Variational Quantum Circuits
+  as second-stage document re-ranking models within a hybrid scientific
+  document retrieval framework using the BEIR SciFact benchmark.
