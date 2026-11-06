@@ -1,0 +1,2 @@
+platform,processor,python_version,numpy_version,pandas_version,queries,candidates_per_query,repeats,warmup_runs_per_query,quantum_backend,vqc_qubits,vqc_depth,timing_scope
+Windows-11-10.0.26200-SP0,"Intel64 Family 6 Model 170 Stepping 4, GenuineIntel",3.13.13,2.5.0,2.3.3,60,20,3,1,PennyLane default.qubit simulator,4,4,Precomputed features; preprocessing and inference measured separately
