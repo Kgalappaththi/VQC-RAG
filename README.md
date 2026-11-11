@@ -156,3 +156,17 @@ Diyagama, Homagama
 Sri Lanka
 
 Email: kgalappaththi@itum.mrt.ac.lk
+
+## Scientific Reports Revision (November 2026)
+
+The revised experiments for the manuscript *Simulated Variational Quantum Circuits for Hybrid Scientific Document Re-ranking* are available in the [scientific_reports_2026](scientific_reports_2026/) folder.
+
+This update includes query-disjoint data partitions, classical baseline comparisons, multi-seed VQC evaluation, fusion experiments, statistical analysis and computational timing results.
+
+Weighted VQC fusion showed a modest improvement over the Hybrid baseline on the previously examined test partition. However, the comparison with the classical MLP baseline did not establish a statistically significant VQC advantage. The findings remain exploratory and do not demonstrate quantum advantage.
+
+This folder contains a selected public reproducibility package. Some cached data and embeddings are excluded pending verification of redistribution permissions.
+
+**Manuscript status:** Revised manuscript submitted to *Scientific Reports*, November 2026.
+
+
