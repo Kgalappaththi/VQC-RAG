@@ -1,0 +1,9 @@
+{
+  "source": "Original uploaded repository VQC-RAG-1.0-qmi-submission",
+  "seed": 20261106,
+  "rng": "numpy.random.default_rng PCG64",
+  "split": "180 train, 60 validation, 60 test queries",
+  "eligibility": "at least one qrel-positive and one qrel-unmarked top20 candidate",
+  "selection": "uniform random split across all 300 query IDs; no outcome-driven optimisation",
+  "warning": "SciFact original test queries repartitioned for exploratory supervised re-ranking; no external independent test corpus"
+}

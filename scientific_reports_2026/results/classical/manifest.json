@@ -1,0 +1,28 @@
+{
+  "original_repository": "VQC-RAG-1.0-qmi-submission.zip",
+  "frozen_split_seed": 20261106,
+  "query_partition_counts": {
+    "train": 180,
+    "validation": 60,
+    "test": 60
+  },
+  "eligible_pair_counts": {
+    "train": 151,
+    "validation": 44,
+    "test": 52
+  },
+  "feature_dimensions": 1536,
+  "pca_components": 6,
+  "pca_train_rows": 302,
+  "explained_variance_ratio_sum": 0.14134138822555542,
+  "fusion_alpha_hybrid": 0.8,
+  "ranking_ties": "stable original candidate order",
+  "metric_cutoffs": "MRR@10 MAP@10; other cutoffs explicitly labelled",
+  "models": [
+    "LogisticRegression",
+    "MLP_seed7",
+    "MLP_seed21",
+    "MLP_seed42"
+  ],
+  "warning": "No VQC model trained. These classical controls are not equivalent to a pairwise hinge objective; MLP uses classification cross-entropy. No external test corpus."
+}
