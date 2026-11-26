@@ -1,0 +1,3 @@
+# SciFact experiments
+
+The recorded 300 queries were split into 180 training, 60 validation and 60 test queries. Training-fitted preprocessing, six-qubit four-layer VQC and seeds 7, 21 and 42 are documented in configs, data and results. The 0.8/0.2 fusion is exploratory, not validation-optimal. Test outcomes were inspected during development. Run `python final_statistics.py` from this directory in a disposable copy. See experiments for training and evaluation scripts; original_pipeline and evidence are historical. Raw upstream text must be retrieved separately. See the root README for the independent NFCorpus evaluation and licence scope.

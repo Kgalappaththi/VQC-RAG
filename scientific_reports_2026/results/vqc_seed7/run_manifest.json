@@ -1,0 +1,14 @@
+{
+  "seed": 7,
+  "epochs": 20,
+  "n_qubits": 6,
+  "depth": 4,
+  "train_pairs": 151,
+  "validation_pairs": 44,
+  "test_pairs": 52,
+  "training_seconds": 713.790133500006,
+  "pairwise_accuracy_train": 0.6490066225165563,
+  "pairwise_accuracy_validation": 0.45454545454545453,
+  "pairwise_accuracy_test": 0.5576923076923077,
+  "caveat": "Test pairwise accuracy is descriptive only; model selection must use validation. Non-qrels are unjudged, not confirmed irrelevant."
+}

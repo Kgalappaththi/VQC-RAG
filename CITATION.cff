@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite this repository and the associated journal article."
+message: "If you use this software or experimental materials, please cite the published Zenodo reproducibility archive."
 
 title: "Simulated Variational Quantum Circuits for Hybrid Scientific Document Re-ranking"
 
@@ -12,13 +12,13 @@ authors:
   - family-names: "Wattegama"
     given-names: "Wattegama Gedara Chathura Piyumal Bandara"
 
-repository-code: "https://github.com/Kgalappaththi/VQC-RAG"
+repository-code: "https://github.com/Kgalappaththi/VQC-RAG/tree/scientific-reports-revision-2"
+
+url: "https://doi.org/10.5281/zenodo.24132662"
 
 license: MIT
 
-version: "1.0.0"
-
-date-released: 2026-07-15
+version: "2.0.0"
 
 keywords:
   - Scientific Document Retrieval
@@ -26,12 +26,25 @@ keywords:
   - Variational Quantum Circuits
   - Quantum Machine Learning
   - Hybrid Retrieval
+  - Document Re-ranking
   - BEIR
   - SciFact
+  - NFCorpus
+  - Reproducibility
 
 abstract: >
-  This repository contains the implementation accompanying the manuscript
-  "Simulated Variational Quantum Circuits for Hybrid Scientific Document
-  Re-ranking". The study evaluates simulated Variational Quantum Circuits
-  as second-stage document re-ranking models within a hybrid scientific
-  document retrieval framework using the BEIR SciFact benchmark.
+  This repository contains the experimental code accompanying
+  the manuscript "Simulated Variational Quantum Circuits for
+  Hybrid Scientific Document Re-ranking". The study evaluates
+  simulated variational quantum circuits for second-stage
+  document re-ranking within a hybrid retrieval framework.
+  The second-round revision includes classical MLP-BCE and
+  MLP-Hinge comparisons, exploratory evaluation on SciFact,
+  independent cross-domain evaluation on NFCorpus, statistical
+  analysis and computational latency benchmarking.
+  The complete reproducibility package is available on Zenodo.
+
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.24132662"
+    description: "Published Zenodo reproducibility package, version 1.0.0."

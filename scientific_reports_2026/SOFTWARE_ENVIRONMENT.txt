@@ -1,0 +1,16 @@
+Software environment used for the revised experiments
+
+Python: 3.13.13
+
+Installed packages:
+numpy: 2.5.0
+pandas: 2.3.3
+scikit-learn: 1.9.0
+pennylane: 0.45.0
+torch: 2.12.1
+scipy: 1.18.0
+beir: 2.2.0
+sentence-transformers: 5.6.0
+
+The original dependency specifications are stored under VQC-RAG/.
+The original source code and tests are stored under original_pipeline/.

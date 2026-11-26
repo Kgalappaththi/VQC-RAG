@@ -1,0 +1,4 @@
+partition,queries,pair_eligible,relevant_in_top20,qrels
+test,60,52,59,69
+train,180,151,168,200
+validation,60,44,49,70
