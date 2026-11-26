@@ -1,0 +1,8 @@
+numpy
+pandas
+scipy
+scikit-learn
+sentence-transformers
+rank-bm25
+pennylane==0.45.0
+beir

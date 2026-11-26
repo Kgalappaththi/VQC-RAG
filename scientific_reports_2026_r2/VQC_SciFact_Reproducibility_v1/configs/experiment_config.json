@@ -1,0 +1,39 @@
+{
+  "split_seed": 20261106,
+  "split": {
+    "train": 180,
+    "validation": 60,
+    "test": 60
+  },
+  "candidate_depth": 20,
+  "feature_dimensions": 1536,
+  "pca_components": 6,
+  "vqc": {
+    "qubits": 6,
+    "layers": 4,
+    "learning_rate": 0.05,
+    "margin": 0.1,
+    "epochs_initial": 20,
+    "seeds": [
+      42,
+      7,
+      21
+    ]
+  },
+  "fusion": {
+    "rrf_k": 60,
+    "hybrid_weight": 0.8,
+    "vqc_weight": 0.2,
+    "selection_status": "exploratory; not validation-optimal"
+  },
+  "metrics": [
+    "Recall@3",
+    "Recall@5",
+    "Recall@10",
+    "MRR@10",
+    "MAP@10",
+    "nDCG@5",
+    "nDCG@10"
+  ],
+  "model_selection": "Query-disjoint partitions; test outcomes inspected during development. Test comparisons are exploratory."
+}
